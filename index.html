@@ -1,291 +1,1251 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ruta661 - Roleplay</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ruta661 - Roleplay</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;scroll-behavior:smooth;}
-body{
-    background:linear-gradient(-45deg,#0f2027,#203a43,#2c5364,#1c1c1c);
-    background-size:400% 400%;
-    animation:bg 15s ease infinite;
-    color:white;
-}
-@keyframes bg{
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
-}
+  <style>
+    :root{
+      --bg1:#0f2027;
+      --bg2:#203a43;
+      --bg3:#2c5364;
+      --bg4:#121212;
 
-nav{
-    position:fixed;
-    top:0;
-    width:100%;
-    background:rgba(0,0,0,0.6);
-    backdrop-filter:blur(10px);
-    padding:15px 50px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    z-index:1000;
-}
-nav h2{font-weight:700;}
-nav ul{list-style:none;display:flex;gap:25px;}
-nav ul li a{
-    text-decoration:none;
-    color:white;
-    font-weight:500;
-    transition:.3s;
-}
-nav ul li a:hover{color:#00f2ff;}
+      --glass: rgba(255,255,255,.06);
+      --glass2: rgba(255,255,255,.10);
+      --stroke: rgba(255,255,255,.12);
 
-.hero{
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    text-align:center;
-    position:relative;
-    overflow:hidden;
-}
-.logo{
-    width:170px;
-    animation:float 3s ease-in-out infinite;
-}
-@keyframes float{
-    0%,100%{transform:translateY(0);}
-    50%{transform:translateY(-15px);}
-}
-.hero h1{
-    font-size:75px;
-    font-weight:900;
-    background:linear-gradient(90deg,#00f2ff,#00ff95);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-}
-.hero p{margin-top:15px;font-size:22px;opacity:.85;}
-.buttons{margin-top:40px;}
-.btn{
-    display:inline-block;
-    padding:15px 35px;
-    margin:10px;
-    border-radius:40px;
-    text-decoration:none;
-    color:white;
-    font-weight:600;
-    transition:.3s;
-    cursor:pointer;
-}
-.btn:hover{transform:scale(1.08);}
-.discord{background:linear-gradient(45deg,#5865F2,#7289DA);}
-.play{background:linear-gradient(45deg,#00ff95,#00c3ff);}
-.secondary{background:linear-gradient(45deg,#ff512f,#dd2476);}
+      --text: #ffffff;
+      --muted: rgba(255,255,255,.75);
 
-section{
-    padding:100px 10%;
-    text-align:center;
-}
-section h2{
-    font-size:40px;
-    margin-bottom:40px;
-}
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:30px;
-}
-.card{
-    background:rgba(255,255,255,0.05);
-    padding:30px;
-    border-radius:20px;
-    backdrop-filter:blur(10px);
-    transition:.3s;
-}
-.card:hover{
-    transform:translateY(-10px);
-    background:rgba(255,255,255,0.1);
-}
+      --c1:#00f2ff;
+      --c2:#00ff95;
+      --c3:#ff512f;
+      --c4:#dd2476;
 
-footer{
-    background:#111;
-    padding:30px;
-    text-align:center;
-    opacity:.8;
-}
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
+      --shadow2: 0 12px 30px rgba(0,0,0,.28);
 
-.particle{
-    position:absolute;
-    width:4px;
-    height:15px;
-    background:rgba(255,255,255,0.25);
-    top:-50px;
-    animation:fall linear infinite;
-}
-@keyframes fall{
-    to{transform:translateY(110vh);opacity:0;}
-}
+      --radius: 22px;
+      --radius2: 16px;
+      --pad: clamp(18px, 2.3vw, 34px);
 
-#hint{
-    position:fixed;
-    bottom:20px;
-    right:20px;
-    font-size:14px;
-    opacity:.7;
-}
+      --navH: 72px;
+      --max: 1180px;
+    }
 
-/* MUSIC PANEL */
-#musicBox{
-    position:fixed;
-    bottom:20px;
-    left:20px;
-    background:rgba(0,0,0,0.6);
-    backdrop-filter:blur(10px);
-    padding:15px;
-    border-radius:15px;
-    display:flex;
-    align-items:center;
-    gap:15px;
-}
-#musicBox img{
-    width:60px;
-    border-radius:10px;
-}
-#musicBox input{
-    width:100px;
-}
-</style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;}
+    html{scroll-behavior:smooth;}
+    body{
+      min-height:100vh;
+      color:var(--text);
+      background:linear-gradient(-45deg,var(--bg1),var(--bg2),var(--bg3),var(--bg4));
+      background-size:400% 400%;
+      animation:bg 16s ease infinite;
+      overflow-x:hidden;
+    }
+    @keyframes bg{
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+
+    /* Background glow */
+    .glow{
+      position:fixed; inset:-30vmax;
+      background:
+        radial-gradient(60vmax 60vmax at 20% 20%, rgba(0,242,255,.18), transparent 60%),
+        radial-gradient(55vmax 55vmax at 80% 30%, rgba(0,255,149,.14), transparent 60%),
+        radial-gradient(55vmax 55vmax at 60% 85%, rgba(221,36,118,.12), transparent 60%);
+      filter: blur(14px);
+      pointer-events:none;
+      z-index:-2;
+      transform: translateZ(0);
+    }
+
+    /* Scroll progress bar */
+    #progressWrap{
+      position:fixed; top:0; left:0; right:0; height:3px;
+      z-index:2000;
+      background:rgba(255,255,255,.06);
+      backdrop-filter: blur(10px);
+    }
+    #progressBar{
+      height:100%;
+      width:0%;
+      background:linear-gradient(90deg, var(--c1), var(--c2));
+      box-shadow:0 0 16px rgba(0,242,255,.35);
+    }
+
+    /* Layout helpers */
+    .container{
+      width:min(var(--max), calc(100% - 2*var(--pad)));
+      margin-inline:auto;
+    }
+
+    /* NAV */
+    nav{
+      position:fixed;
+      top:0; left:0; right:0;
+      height:var(--navH);
+      z-index:1500;
+      display:flex;
+      align-items:center;
+      transition: .25s ease;
+      background: rgba(0,0,0,.35);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    nav.shrink{
+      background: rgba(0,0,0,.52);
+      border-bottom-color: rgba(255,255,255,.10);
+    }
+    .navInner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      width:min(var(--max), calc(100% - 2*var(--pad)));
+      margin-inline:auto;
+      gap:18px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      user-select:none;
+    }
+    .brandMark{
+      width:34px; height:34px; border-radius:10px;
+      background:linear-gradient(135deg, rgba(0,242,255,.9), rgba(0,255,149,.8));
+      box-shadow: 0 10px 30px rgba(0,242,255,.18);
+      position:relative;
+      overflow:hidden;
+    }
+    .brandMark::after{
+      content:"";
+      position:absolute; inset:-40%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.55), transparent 45%);
+      transform: rotate(25deg);
+      opacity:.6;
+    }
+    nav h2{
+      font-weight:800;
+      letter-spacing:.4px;
+      font-size:18px;
+    }
+
+    .navLinks{
+      list-style:none;
+      display:flex;
+      align-items:center;
+      gap:22px;
+    }
+    .navLinks a{
+      text-decoration:none;
+      color:rgba(255,255,255,.88);
+      font-weight:600;
+      font-size:14px;
+      padding:10px 12px;
+      border-radius:999px;
+      transition: .22s ease;
+      position:relative;
+    }
+    .navLinks a:hover{
+      color:#fff;
+      background: rgba(255,255,255,.08);
+    }
+    .navLinks a.active{
+      color:#0b1114;
+      background: linear-gradient(90deg, var(--c1), var(--c2));
+      box-shadow: 0 10px 28px rgba(0,242,255,.20);
+    }
+
+    /* Mobile menu */
+    .burger{
+      display:none;
+      width:44px; height:44px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      backdrop-filter: blur(12px);
+      cursor:pointer;
+      align-items:center;
+      justify-content:center;
+      transition:.2s ease;
+    }
+    .burger:hover{ transform: translateY(-1px); background: rgba(255,255,255,.09); }
+    .burger svg{ width:20px; height:20px; fill:none; stroke:#fff; stroke-width:2; stroke-linecap:round; }
+
+    .drawer{
+      position:fixed; top:0; right:-380px;
+      width:min(360px, 92vw);
+      height:100vh;
+      background: rgba(0,0,0,.72);
+      backdrop-filter: blur(14px);
+      border-left: 1px solid rgba(255,255,255,.10);
+      z-index:1700;
+      transition: .28s ease;
+      display:flex;
+      flex-direction:column;
+      padding: 18px;
+      gap:14px;
+    }
+    .drawer.open{ right:0; }
+    .drawerTop{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding-bottom:8px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .closeBtn{
+      width:44px;height:44px;border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      cursor:pointer;
+      display:grid; place-items:center;
+      transition:.2s ease;
+    }
+    .closeBtn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.09); }
+    .closeBtn svg{ width:18px;height:18px; fill:none; stroke:#fff; stroke-width:2; stroke-linecap:round; }
+    .drawerLinks{
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      padding-top:8px;
+    }
+    .drawerLinks a{
+      text-decoration:none;
+      color:rgba(255,255,255,.92);
+      font-weight:700;
+      padding:14px 14px;
+      border-radius:16px;
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      transition:.2s ease;
+    }
+    .drawerLinks a:hover{ background: rgba(255,255,255,.10); transform: translateY(-1px); }
+
+    .backdrop{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.35);
+      z-index:1650;
+      opacity:0;
+      pointer-events:none;
+      transition:.25s ease;
+    }
+    .backdrop.show{
+      opacity:1;
+      pointer-events:auto;
+    }
+
+    /* HERO */
+    .hero{
+      min-height:100vh;
+      padding-top: calc(var(--navH) + 30px);
+      display:flex;
+      align-items:center;
+      position:relative;
+    }
+    .heroGrid{
+      width:min(var(--max), calc(100% - 2*var(--pad)));
+      margin-inline:auto;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: clamp(18px, 4vw, 60px);
+      align-items:center;
+    }
+
+    .heroCard{
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: calc(var(--radius) + 6px);
+      box-shadow: var(--shadow);
+      padding: clamp(22px, 3vw, 40px);
+      backdrop-filter: blur(16px);
+      position:relative;
+      overflow:hidden;
+    }
+    .heroCard::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(circle at 20% 20%, rgba(0,242,255,.25), transparent 45%),
+                  radial-gradient(circle at 80% 30%, rgba(0,255,149,.20), transparent 50%),
+                  radial-gradient(circle at 40% 80%, rgba(221,36,118,.16), transparent 55%);
+      opacity:.85;
+      pointer-events:none;
+    }
+    .heroContent{ position:relative; z-index:1; }
+
+    .logoWrap{
+      display:flex;
+      align-items:center;
+      gap:16px;
+      margin-bottom: 14px;
+    }
+    .logo{
+      width:78px;
+      height:78px;
+      border-radius:18px;
+      object-fit:cover;
+      box-shadow: 0 18px 50px rgba(0,0,0,.35);
+      border:1px solid rgba(255,255,255,.18);
+      animation: float 3.2s ease-in-out infinite;
+      background: rgba(255,255,255,.06);
+    }
+    @keyframes float{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-10px)}
+    }
+
+    .heroTitle{
+      font-size: clamp(44px, 5.2vw, 78px);
+      font-weight: 900;
+      line-height: .95;
+      letter-spacing: .6px;
+      margin: 6px 0 10px;
+      background: linear-gradient(90deg, var(--c1), var(--c2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 10px 30px rgba(0,242,255,.10);
+    }
+    .heroSubtitle{
+      font-size: clamp(16px, 1.4vw, 20px);
+      color: var(--muted);
+      max-width: 62ch;
+    }
+
+    .buttons{
+      margin-top: 28px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 14px 20px;
+      border-radius: 999px;
+      text-decoration:none;
+      color:white;
+      font-weight: 800;
+      letter-spacing:.2px;
+      transition: .18s ease;
+      cursor:pointer;
+      border: 1px solid rgba(255,255,255,.12);
+      user-select:none;
+      box-shadow: 0 12px 30px rgba(0,0,0,.25);
+      backdrop-filter: blur(10px);
+      will-change: transform;
+    }
+    .btn:hover{ transform: translateY(-2px) scale(1.02); }
+    .btn:active{ transform: translateY(0) scale(.99); }
+    .discord{ background: linear-gradient(45deg, #5865F2, #7289DA); }
+    .play{ background: linear-gradient(45deg, var(--c2), #00c3ff); }
+    .secondary{ background: linear-gradient(45deg, var(--c3), var(--c4)); }
+    .btn svg{ width:18px; height:18px; fill:none; stroke:#fff; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+
+    /* Hero side panel */
+    .side{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+    .panel{
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow2);
+      backdrop-filter: blur(14px);
+      overflow:hidden;
+      position:relative;
+    }
+    .panelHeader{
+      padding: 16px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .panelHeader h3{
+      font-size:14px;
+      letter-spacing:.2px;
+      color: rgba(255,255,255,.92);
+      font-weight:800;
+    }
+    .pill{
+      font-size:12px;
+      padding:8px 10px;
+      border-radius:999px;
+      background: rgba(0,0,0,.26);
+      border: 1px solid rgba(255,255,255,.10);
+      color: rgba(255,255,255,.82);
+      display:flex;
+      align-items:center;
+      gap:8px;
+      white-space:nowrap;
+    }
+    .dot{
+      width:8px;height:8px;border-radius:50%;
+      background: linear-gradient(90deg, var(--c1), var(--c2));
+      box-shadow: 0 0 18px rgba(0,242,255,.35);
+    }
+    .panelBody{
+      padding: 18px;
+      display:grid;
+      gap:12px;
+    }
+    .miniCard{
+      background: rgba(0,0,0,.18);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
+      padding: 14px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .miniCard span{
+      color: rgba(255,255,255,.78);
+      font-weight:700;
+      font-size:13px;
+    }
+    .miniIcon{
+      width:38px;height:38px;border-radius:14px;
+      display:grid;place-items:center;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .miniIcon svg{ width:18px;height:18px; fill:none; stroke:#fff; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; opacity:.95; }
+
+    /* SECTIONS */
+    section{
+      padding: 90px 0;
+      position:relative;
+      scroll-margin-top: calc(var(--navH) + 18px);
+    }
+    .sectionCard{
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: calc(var(--radius) + 6px);
+      box-shadow: var(--shadow2);
+      backdrop-filter: blur(14px);
+      padding: clamp(22px, 3vw, 40px);
+      overflow:hidden;
+      position:relative;
+    }
+    .sectionCard::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(circle at 15% 10%, rgba(0,242,255,.16), transparent 45%),
+                  radial-gradient(circle at 85% 25%, rgba(0,255,149,.12), transparent 55%);
+      opacity:.8;
+      pointer-events:none;
+    }
+    .sectionInner{ position:relative; z-index:1; }
+
+    .sectionHeader{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom: 22px;
+      flex-wrap:wrap;
+    }
+    section h2{
+      font-size: clamp(26px, 3.2vw, 42px);
+      font-weight: 900;
+      letter-spacing:.2px;
+    }
+    .sectionHeader p{
+      color: rgba(255,255,255,.75);
+      max-width: 64ch;
+      font-size: 14px;
+      font-weight:600;
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+      margin-top: 10px;
+    }
+    .card{
+      grid-column: span 4;
+      background: rgba(0,0,0,.18);
+      border: 1px solid rgba(255,255,255,.10);
+      padding: 18px;
+      border-radius: var(--radius2);
+      transition: .22s ease;
+      position:relative;
+      overflow:hidden;
+      min-height: 126px;
+    }
+    .card::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(circle at 20% 20%, rgba(0,242,255,.14), transparent 45%);
+      opacity:.8;
+      pointer-events:none;
+      transition:.22s ease;
+    }
+    .card:hover{
+      transform: translateY(-6px);
+      background: rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.16);
+      box-shadow: 0 16px 50px rgba(0,0,0,.30);
+    }
+    .card:hover::before{ opacity:1; }
+    .card h3{
+      font-size:16px;
+      font-weight:900;
+      letter-spacing:.2px;
+      margin-bottom: 6px;
+    }
+    .card p{
+      font-size:13px;
+      color: rgba(255,255,255,.78);
+      font-weight:600;
+      line-height:1.6;
+    }
+
+    /* FOOTER */
+    footer{
+      padding: 34px 0 44px;
+      color: rgba(255,255,255,.75);
+      text-align:center;
+    }
+    footer .foot{
+      width:min(var(--max), calc(100% - 2*var(--pad)));
+      margin-inline:auto;
+      background: rgba(0,0,0,.35);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius);
+      backdrop-filter: blur(12px);
+      padding: 18px 16px;
+    }
+
+    /* Hints & floating controls */
+    #hint{
+      position:fixed;
+      bottom:20px;
+      right:20px;
+      font-size:12px;
+      opacity:.75;
+      z-index:1400;
+      background: rgba(0,0,0,.45);
+      border: 1px solid rgba(255,255,255,.10);
+      backdrop-filter: blur(12px);
+      padding: 10px 12px;
+      border-radius: 999px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      box-shadow: 0 12px 30px rgba(0,0,0,.28);
+    }
+
+    #toTop{
+      position:fixed;
+      right:20px;
+      bottom:78px;
+      width:46px; height:46px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.45);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 12px 30px rgba(0,0,0,.28);
+      cursor:pointer;
+      display:grid;
+      place-items:center;
+      z-index:1400;
+      opacity:0;
+      pointer-events:none;
+      transform: translateY(8px);
+      transition:.22s ease;
+    }
+    #toTop.show{
+      opacity:1;
+      pointer-events:auto;
+      transform: translateY(0);
+    }
+    #toTop svg{ width:18px;height:18px; fill:none; stroke:#fff; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+
+    /* MUSIC PANEL */
+    #musicBox{
+      position:fixed;
+      bottom:20px;
+      left:20px;
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(14px);
+      padding: 12px 12px;
+      border-radius: 18px;
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      z-index:1400;
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: 0 14px 40px rgba(0,0,0,.32);
+      max-width: min(420px, calc(100vw - 40px));
+    }
+    #musicBox img{
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      object-fit: cover;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      flex: 0 0 auto;
+    }
+    .musicMeta{
+      min-width: 160px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      flex:1 1 auto;
+    }
+    .musicTitle{
+      font-size: 12px;
+      font-weight: 800;
+      color: rgba(255,255,255,.9);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      max-width: 240px;
+    }
+    .musicRow{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    #volumeSlider{
+      width: 140px;
+      accent-color: #00f2ff;
+    }
+    .musicBtns{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex: 0 0 auto;
+    }
+    .iconBtn{
+      width:40px; height:40px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      cursor:pointer;
+      display:grid;
+      place-items:center;
+      transition:.2s ease;
+      backdrop-filter: blur(12px);
+    }
+    .iconBtn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.10); }
+    .iconBtn svg{ width:18px;height:18px; fill:none; stroke:#fff; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+
+    /* Canvas particles */
+    #fx{
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      pointer-events:none;
+      opacity:.9;
+    }
+
+    /* Reveal */
+    .reveal{
+      opacity:0;
+      transform: translateY(14px);
+      transition: .55s ease;
+      will-change: transform, opacity;
+    }
+    .reveal.in{
+      opacity:1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .heroGrid{ grid-template-columns: 1fr; }
+      .side{ order: 2; }
+    }
+    @media (max-width: 760px){
+      .navLinks{ display:none; }
+      .burger{ display:flex; }
+      .cards{ gap: 12px; }
+      .card{ grid-column: span 12; }
+      #musicBox{ border-radius: 18px; }
+      #volumeSlider{ width: 120px; }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *{ scroll-behavior:auto !important; }
+      body{ animation:none !important; }
+      .logo{ animation:none !important; }
+      .reveal{ transition:none !important; }
+    }
+  </style>
 </head>
-<body>
 
-<nav>
-    <h2>Ruta661</h2>
-    <ul>
+<body>
+  <div id="progressWrap" aria-hidden="true"><div id="progressBar"></div></div>
+  <div class="glow" aria-hidden="true"></div>
+  <canvas id="fx" aria-hidden="true"></canvas>
+
+  <nav id="nav">
+    <div class="navInner">
+      <div class="brand" aria-label="Ruta661">
+        <div class="brandMark" aria-hidden="true"></div>
+        <h2>Ruta661</h2>
+      </div>
+
+      <ul class="navLinks" id="navLinks">
         <li><a href="#despre">Despre</a></li>
         <li><a href="#features">Features</a></li>
         <li><a href="#staff">Staff</a></li>
         <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <button class="burger" id="burger" aria-label="Meniu">
+        <svg viewBox="0 0 24 24">
+          <path d="M4 7h16M4 12h16M4 17h16"></path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <div class="backdrop" id="backdrop" aria-hidden="true"></div>
+
+  <aside class="drawer" id="drawer" aria-label="Meniu">
+    <div class="drawerTop">
+      <div class="brand" aria-label="Ruta661">
+        <div class="brandMark" aria-hidden="true"></div>
+        <h2>Ruta661</h2>
+      </div>
+      <button class="closeBtn" id="closeDrawer" aria-label="Inchide">
+        <svg viewBox="0 0 24 24">
+          <path d="M6 6l12 12M18 6L6 18"></path>
+        </svg>
+      </button>
+    </div>
+    <ul class="drawerLinks" id="drawerLinks">
+      <li><a href="#despre">Despre</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#staff">Staff</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
-</nav>
+  </aside>
 
-<div class="hero">
-    <img src="https://image2url.com/r2/default/images/1772485887739-b92e97d8-fdf6-41b2-a3cc-ed8df1a35bd1.png" class="logo">
-    <h1>RUTA661</h1>
-    <p>O experienta de neuitat! Alaturate si tu!</p>
+  <header class="hero" id="top">
+    <div class="heroGrid">
+      <div class="heroCard reveal">
+        <div class="heroContent">
+          <div class="logoWrap">
+            <img
+              src="https://image2url.com/r2/default/images/1772485887739-b92e97d8-fdf6-41b2-a3cc-ed8df1a35bd1.png"
+              class="logo"
+              alt="Logo Ruta661"
+              loading="lazy"
+              decoding="async"
+            />
+            <div>
+              <div class="pill"><span class="dot" aria-hidden="true"></span><span>Online</span></div>
+            </div>
+          </div>
 
-    <div class="buttons">
-        <a href="https://discord.gg/ZRPSgAmt6s" target="_blank" class="btn discord">Intra pe Discord</a>
-        <a href="https://www.roblox.com/games/12505874661" target="_blank" class="btn play">Intra pe Joc!</a>
-        <a href="#features" class="btn secondary">Vezi Features</a>
+          <h1 class="heroTitle">RUTA661</h1>
+          <p class="heroSubtitle">O experienta de neuitat! Alaturate si tu!</p>
+
+          <div class="buttons">
+            <a href="https://discord.gg/ZRPSgAmt6s" target="_blank" rel="noopener" class="btn discord" aria-label="Intra pe Discord">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8 8.5h.01M16 8.5h.01"></path>
+                <path d="M7.5 16.5c1.2 1 2.7 1.5 4.5 1.5s3.3-.5 4.5-1.5"></path>
+                <path d="M20 17c0 2-2 3-2 3l-1-1"></path>
+                <path d="M4 17c0 2 2 3 2 3l1-1"></path>
+                <path d="M7 5c1.5-1 3.3-1.5 5-1.5S15.5 4 17 5"></path>
+                <path d="M6 6c-1 2-2 4-2 7 0 4 3 7 8 7s8-3 8-7c0-3-1-5-2-7"></path>
+              </svg>
+              Intra pe Discord
+            </a>
+
+            <a href="https://www.roblox.com/games/12505874661" target="_blank" rel="noopener" class="btn play" aria-label="Intra pe Joc">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8 5l12 7-12 7V5z"></path>
+              </svg>
+              Intra pe Joc!
+            </a>
+
+            <a href="#features" class="btn secondary" aria-label="Vezi Features">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 5v14"></path>
+                <path d="M5 12h14"></path>
+              </svg>
+              Vezi Features
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="side">
+        <div class="panel reveal">
+          <div class="panelHeader">
+            <h3>Server</h3>
+            <div class="pill"><span class="dot" aria-hidden="true"></span><span>Roleplay</span></div>
+          </div>
+          <div class="panelBody">
+            <div class="miniCard">
+              <span>Joburi</span>
+              <div class="miniIcon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M4 7h16"></path>
+                  <path d="M7 7V5h10v2"></path>
+                  <path d="M6 7v12h12V7"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="miniCard">
+              <span>Economie</span>
+              <div class="miniIcon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 1v22"></path>
+                  <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7H14a3.5 3.5 0 0 1 0 7H6"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="miniCard">
+              <span>Masini</span>
+              <div class="miniIcon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M3 16l1-5 2-3h12l2 3 1 5"></path>
+                  <path d="M5 16h14"></path>
+                  <path d="M7 16v2"></path>
+                  <path d="M17 16v2"></path>
+                  <path d="M7 12h10"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel reveal">
+          <div class="panelHeader">
+            <h3>Acces</h3>
+            <div class="pill"><span class="dot" aria-hidden="true"></span><span>Rapid</span></div>
+          </div>
+          <div class="panelBody">
+            <a href="https://discord.gg/ZRPSgAmt6s" target="_blank" rel="noopener" class="btn discord" style="width:100%;justify-content:center;">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8 8.5h.01M16 8.5h.01"></path>
+                <path d="M7.5 16.5c1.2 1 2.7 1.5 4.5 1.5s3.3-.5 4.5-1.5"></path>
+                <path d="M6 6c-1 2-2 4-2 7 0 4 3 7 8 7s8-3 8-7c0-3-1-5-2-7"></path>
+              </svg>
+              Discord
+            </a>
+            <a href="https://www.roblox.com/games/12505874661" target="_blank" rel="noopener" class="btn play" style="width:100%;justify-content:center;">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8 5l12 7-12 7V5z"></path>
+              </svg>
+              Joc
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
+  </header>
 
-<section id="despre">
-    <h2>Despre Server</h2>
-    <p>Ruta661 este un server Roblox Roleplay realist cu joburi, economie, masini si interactiuni reale intre jucatori.</p>
-</section>
+  <main class="container">
+    <section id="despre">
+      <div class="sectionCard reveal">
+        <div class="sectionInner">
+          <div class="sectionHeader">
+            <h2>Despre Server</h2>
+            <p>Ruta661 este un server Roblox Roleplay realist cu joburi, economie, masini si interactiuni reale intre jucatori.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<section id="features">
-    <h2>Features</h2>
-    <div class="cards">
-        <div class="card">
-            <h3>Joburi Realiste</h3>
-            <p>Politie, SMURD, Mecanici si multe altele.</p>
+    <section id="features">
+      <div class="sectionCard reveal">
+        <div class="sectionInner">
+          <div class="sectionHeader">
+            <h2>Features</h2>
+            <p></p>
+          </div>
+
+          <div class="cards">
+            <div class="card reveal">
+              <h3>Joburi Realiste</h3>
+              <p>Politie, SMURD, Mecanici si multe altele.</p>
+            </div>
+            <div class="card reveal">
+              <h3>Economie Activa</h3>
+              <p>Sistem bancar, salarii si tranzactii reale.</p>
+            </div>
+            <div class="card reveal">
+              <h3>Masini Custom</h3>
+              <p>Vehicule unice si tuning special.</p>
+            </div>
+          </div>
         </div>
-        <div class="card">
-            <h3>Economie Activa</h3>
-            <p>Sistem bancar, salarii si tranzactii reale.</p>
+      </div>
+    </section>
+
+    <section id="staff">
+      <div class="sectionCard reveal">
+        <div class="sectionInner">
+          <div class="sectionHeader">
+            <h2>Echipa Staff</h2>
+            <p></p>
+          </div>
+
+          <div class="cards">
+            <div class="card reveal">
+              <h3>Fondator</h3>
+              <p>ZUP</p>
+            </div>
+            <div class="card reveal">
+              <h3>Development</h3>
+              <p>Script &amp; Build</p>
+            </div>
+            <div class="card reveal">
+              <h3>Staff</h3>
+              <p>Suport Comunitate</p>
+            </div>
+          </div>
         </div>
-        <div class="card">
-            <h3>Masini Custom</h3>
-            <p>Vehicule unice si tuning special.</p>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="sectionCard reveal">
+        <div class="sectionInner">
+          <div class="sectionHeader">
+            <h2>Contact</h2>
+            <p>Alatura-te comunitatii noastre pe Discord pentru suport si evenimente exclusive!</p>
+          </div>
+
+          <div class="buttons" style="margin-top:10px;">
+            <a href="https://discord.gg/ZRPSgAmt6s" target="_blank" rel="noopener" class="btn discord" aria-label="Intra pe Discord">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8 8.5h.01M16 8.5h.01"></path>
+                <path d="M7.5 16.5c1.2 1 2.7 1.5 4.5 1.5s3.3-.5 4.5-1.5"></path>
+                <path d="M6 6c-1 2-2 4-2 7 0 4 3 7 8 7s8-3 8-7c0-3-1-5-2-7"></path>
+              </svg>
+              Intra pe Discord
+            </a>
+          </div>
         </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="foot">© 2026 Ruta661 Roleplay - Toate drepturile rezervate</div>
+  </footer>
+
+  <div id="hint" title="Muzica">
+    <span aria-hidden="true">🔊</span>
+    <span>Click oriunde pentru muzica</span>
+  </div>
+
+  <button id="toTop" aria-label="Sus">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 5l-7 7"></path>
+      <path d="M12 5l7 7"></path>
+      <path d="M12 5v14"></path>
+    </svg>
+  </button>
+
+  <div id="musicBox" aria-label="Muzica">
+    <img src="https://img.youtube.com/vi/ky7MofVVoBc/hqdefault.jpg" alt="Album" loading="lazy" decoding="async" />
+    <div class="musicMeta">
+      <div class="musicTitle">Nume Muzica: Albert Nbn - Got Em</div>
+      <div class="musicRow">
+        <input type="range" min="0" max="100" value="50" id="volumeSlider" aria-label="Volum" />
+      </div>
     </div>
-</section>
-
-<section id="staff">
-    <h2>Echipa Staff</h2>
-    <div class="cards">
-        <div class="card">
-            <h3>Fondator</h3>
-            <p>ZUP</p>
-        </div>
-        <div class="card">
-            <h3>Development</h3>
-            <p>Script & Build</p>
-        </div>
-        <div class="card">
-            <h3>Staff</h3>
-            <p>Suport Comunitate</p>
-        </div>
+    <div class="musicBtns">
+      <button class="iconBtn" id="btnPlay" aria-label="Play/Pause">
+        <svg id="icoPlay" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M8 5l12 7-12 7V5z"></path>
+        </svg>
+        <svg id="icoPause" viewBox="0 0 24 24" aria-hidden="true" style="display:none;">
+          <path d="M7 5h3v14H7z"></path>
+          <path d="M14 5h3v14h-3z"></path>
+        </svg>
+      </button>
+      <button class="iconBtn" id="btnMute" aria-label="Mute">
+        <svg id="icoVol" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M11 5L6 9H3v6h3l5 4V5z"></path>
+          <path d="M15.5 8.5a5 5 0 0 1 0 7"></path>
+          <path d="M17.5 6.5a8 8 0 0 1 0 11"></path>
+        </svg>
+        <svg id="icoMuted" viewBox="0 0 24 24" aria-hidden="true" style="display:none;">
+          <path d="M11 5L6 9H3v6h3l5 4V5z"></path>
+          <path d="M16 9l5 6"></path>
+          <path d="M21 9l-5 6"></path>
+        </svg>
+      </button>
     </div>
-</section>
+  </div>
 
-<section id="contact">
-    <h2>Contact</h2>
-    <p>Alatura-te comunitatii noastre pe Discord pentru suport si evenimente exclusive!</p>
-    <a href="https://discord.gg/https://discord.gg/ZRPSgAmt6s" target="_blank" class="btn discord">Intra pe Discord</a>
-</section>
+  <iframe
+    id="music"
+    width="0"
+    height="0"
+    src="https://www.youtube.com/embed/ky7MofVVoBc?autoplay=0&loop=1&playlist=ky7MofVVoBc&enablejsapi=1"
+    allow="autoplay"
+    title="music"
+  ></iframe>
 
-<footer>
-    © 2026 Ruta661 Roleplay - Toate drepturile rezervate
-</footer>
+  <script src="https://www.youtube.com/iframe_api"></script>
 
-<div id="hint">🔊 Click oriunde pentru muzica</div>
+  <script>
+    // ====== Particles (canvas) ======
+    const canvas = document.getElementById("fx");
+    const ctx = canvas.getContext("2d", { alpha: true });
+    let W, H, DPR;
+    const particles = [];
+    const PCOUNT = 110;
 
-<div id="musicBox">
-    <img src="https://img.youtube.com/vi/ky7MofVVoBc/hqdefault.jpg">
-    <div>
-        <div style="font-size:14px;">Nume Muzica: Albert Nbn - Got Em</div>
-        <input type="range" min="0" max="100" value="50" id="volumeSlider">
-    </div>
-</div>
-
-<iframe id="music"
-width="0"
-height="0"
-src="https://www.youtube.com/embed/ky7MofVVoBc?autoplay=0&loop=1&playlist=ky7MofVVoBc&enablejsapi=1"
-allow="autoplay">
-</iframe>
-
-<script src="https://www.youtube.com/iframe_api"></script>
-
-<script>
-
-for(let i=0;i<80;i++){
-    let p=document.createElement("div");
-    p.className="particle";
-    p.style.left=Math.random()*100+"vw";
-    p.style.animationDuration=(2+Math.random()*3)+"s";
-    document.body.appendChild(p);
-}
-
-let player;
-function onYouTubeIframeAPIReady(){
-    player = new YT.Player('music');
-}
-
-let started=false;
-document.body.addEventListener("click", function(){
-    if(started) return;
-    player.playVideo();
-    document.getElementById("hint").style.display="none";
-    started=true;
-});
-
-document.getElementById("volumeSlider").addEventListener("input", function(){
-    if(player){
-        player.setVolume(this.value);
+    function resizeCanvas(){
+      DPR = Math.min(2, window.devicePixelRatio || 1);
+      W = canvas.width = Math.floor(window.innerWidth * DPR);
+      H = canvas.height = Math.floor(window.innerHeight * DPR);
+      canvas.style.width = window.innerWidth + "px";
+      canvas.style.height = window.innerHeight + "px";
     }
-});
+    function rand(min, max){ return Math.random() * (max - min) + min; }
 
-</script>
+    function initParticles(){
+      particles.length = 0;
+      for(let i=0;i<PCOUNT;i++){
+        particles.push({
+          x: rand(0, W),
+          y: rand(-H, H),
+          w: rand(1.5, 3.5) * DPR,
+          h: rand(10, 26) * DPR,
+          s: rand(0.7, 2.4) * DPR,
+          a: rand(0.08, 0.22),
+          drift: rand(-0.35, 0.35) * DPR
+        });
+      }
+    }
 
+    function tick(){
+      ctx.clearRect(0,0,W,H);
+      for(const p of particles){
+        p.y += p.s;
+        p.x += p.drift * 0.2;
+        if(p.y > H + 60 * DPR){ p.y = -60 * DPR; p.x = rand(0, W); }
+        if(p.x < -60 * DPR) p.x = W + 60 * DPR;
+        if(p.x > W + 60 * DPR) p.x = -60 * DPR;
+
+        ctx.globalAlpha = p.a;
+        ctx.fillStyle = "#fff";
+        ctx.fillRect(p.x, p.y, p.w, p.h);
+      }
+      ctx.globalAlpha = 1;
+      requestAnimationFrame(tick);
+    }
+
+    window.addEventListener("resize", () => {
+      resizeCanvas();
+      initParticles();
+    });
+    resizeCanvas();
+    initParticles();
+    tick();
+
+    // ====== Nav + Scroll ======
+    const nav = document.getElementById("nav");
+    const progressBar = document.getElementById("progressBar");
+    const toTop = document.getElementById("toTop");
+
+    function onScroll(){
+      const y = window.scrollY || 0;
+      nav.classList.toggle("shrink", y > 10);
+
+      const doc = document.documentElement;
+      const total = (doc.scrollHeight - doc.clientHeight) || 1;
+      const pct = Math.max(0, Math.min(1, y / total));
+      progressBar.style.width = (pct * 100).toFixed(2) + "%";
+
+      toTop.classList.toggle("show", y > 500);
+    }
+    window.addEventListener("scroll", onScroll, { passive:true });
+    onScroll();
+
+    toTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+    // Active link highlighting
+    const links = Array.from(document.querySelectorAll('#navLinks a'));
+    const dlinks = Array.from(document.querySelectorAll('#drawerLinks a'));
+    const allLinks = links.concat(dlinks);
+
+    const sections = ["despre","features","staff","contact"]
+      .map(id => document.getElementById(id))
+      .filter(Boolean);
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          const id = entry.target.id;
+          links.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + id));
+        }
+      });
+    }, { rootMargin: "-40% 0px -55% 0px", threshold: 0.01 });
+
+    sections.forEach(s => io.observe(s));
+
+    // ====== Mobile drawer ======
+    const burger = document.getElementById("burger");
+    const drawer = document.getElementById("drawer");
+    const closeDrawer = document.getElementById("closeDrawer");
+    const backdrop = document.getElementById("backdrop");
+
+    function openDrawer(){
+      drawer.classList.add("open");
+      backdrop.classList.add("show");
+      document.body.style.overflow = "hidden";
+    }
+    function hideDrawer(){
+      drawer.classList.remove("open");
+      backdrop.classList.remove("show");
+      document.body.style.overflow = "";
+    }
+
+    burger.addEventListener("click", openDrawer);
+    closeDrawer.addEventListener("click", hideDrawer);
+    backdrop.addEventListener("click", hideDrawer);
+
+    allLinks.forEach(a => a.addEventListener("click", () => {
+      if(drawer.classList.contains("open")) hideDrawer();
+    }));
+
+    window.addEventListener("keydown", (e) => {
+      if(e.key === "Escape" && drawer.classList.contains("open")) hideDrawer();
+    });
+
+    // ====== Reveal on scroll ======
+    const reveals = Array.from(document.querySelectorAll(".reveal"));
+    const rio = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if(en.isIntersecting){
+          en.target.classList.add("in");
+          rio.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    reveals.forEach(el => rio.observe(el));
+
+    // ====== YouTube music controls ======
+    let player;
+    let started = false;
+    let isMuted = false;
+
+    const hint = document.getElementById("hint");
+    const vol = document.getElementById("volumeSlider");
+    const btnPlay = document.getElementById("btnPlay");
+    const btnMute = document.getElementById("btnMute");
+    const icoPlay = document.getElementById("icoPlay");
+    const icoPause = document.getElementById("icoPause");
+    const icoVol = document.getElementById("icoVol");
+    const icoMuted = document.getElementById("icoMuted");
+
+    function setPlayIcon(playing){
+      icoPlay.style.display = playing ? "none" : "block";
+      icoPause.style.display = playing ? "block" : "none";
+    }
+    function setMuteIcon(muted){
+      icoVol.style.display = muted ? "none" : "block";
+      icoMuted.style.display = muted ? "block" : "none";
+    }
+
+    function safeStart(){
+      if(started) return;
+      if(player && player.playVideo){
+        player.setVolume(Number(vol.value || 50));
+        player.playVideo();
+        started = true;
+        hint.style.display = "none";
+        setPlayIcon(true);
+      }
+    }
+
+    function onYouTubeIframeAPIReady(){
+      player = new YT.Player("music", {
+        events: {
+          onReady: () => {
+            const savedV = localStorage.getItem("r661_vol");
+            if(savedV !== null){
+              vol.value = String(Math.max(0, Math.min(100, Number(savedV) || 50)));
+            }
+          },
+          onStateChange: (e) => {
+            // 1 = playing, 2 = paused
+            if(e.data === 1) setPlayIcon(true);
+            if(e.data === 2) setPlayIcon(false);
+          }
+        }
+      });
+    }
+    window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
+
+    // Click anywhere to start (browser policy)
+    document.addEventListener("pointerdown", () => safeStart(), { once:false });
+
+    vol.addEventListener("input", function(){
+      localStorage.setItem("r661_vol", String(this.value));
+      if(player && player.setVolume){
+        player.setVolume(Number(this.value));
+      }
+      if(player && player.isMuted && player.isMuted()){
+        // keep muted if user muted intentionally
+      }
+    });
+
+    btnPlay.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if(!player) return;
+      safeStart();
+      const state = player.getPlayerState ? player.getPlayerState() : 0;
+      if(state === 1){
+        player.pauseVideo();
+        setPlayIcon(false);
+      }else{
+        player.playVideo();
+        setPlayIcon(true);
+      }
+    });
+
+    btnMute.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if(!player) return;
+      safeStart();
+      if(!isMuted){
+        player.mute();
+        isMuted = true;
+        setMuteIcon(true);
+      }else{
+        player.unMute();
+        isMuted = false;
+        setMuteIcon(false);
+      }
+    });
+
+    setPlayIcon(false);
+    setMuteIcon(false);
+  </script>
 </body>
 </html>
-
-
