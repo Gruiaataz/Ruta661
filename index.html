@@ -21,7 +21,6 @@ body{
     100%{background-position:0% 50%;}
 }
 
-/* NAVBAR */
 nav{
     position:fixed;
     top:0;
@@ -43,7 +42,6 @@ nav ul li a{
     transition:.3s;
 }
 nav ul li a:hover{color:#00f2ff;}
-
 
 .hero{
     height:100vh;
@@ -81,12 +79,12 @@ nav ul li a:hover{color:#00f2ff;}
     color:white;
     font-weight:600;
     transition:.3s;
+    cursor:pointer;
 }
 .btn:hover{transform:scale(1.08);}
 .discord{background:linear-gradient(45deg,#5865F2,#7289DA);}
 .play{background:linear-gradient(45deg,#00ff95,#00c3ff);}
 .secondary{background:linear-gradient(45deg,#ff512f,#dd2476);}
-
 
 section{
     padding:100px 10%;
@@ -113,14 +111,12 @@ section h2{
     background:rgba(255,255,255,0.1);
 }
 
-
 footer{
     background:#111;
     padding:30px;
     text-align:center;
     opacity:.8;
 }
-
 
 .particle{
     position:absolute;
@@ -134,13 +130,33 @@ footer{
     to{transform:translateY(110vh);opacity:0;}
 }
 
-
 #hint{
     position:fixed;
     bottom:20px;
     right:20px;
     font-size:14px;
     opacity:.7;
+}
+
+/* MUSIC PANEL */
+#musicBox{
+    position:fixed;
+    bottom:20px;
+    left:20px;
+    background:rgba(0,0,0,0.6);
+    backdrop-filter:blur(10px);
+    padding:15px;
+    border-radius:15px;
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+#musicBox img{
+    width:60px;
+    border-radius:10px;
+}
+#musicBox input{
+    width:100px;
 }
 </style>
 </head>
@@ -162,8 +178,8 @@ footer{
     <p>O experienta de neuitat! Alaturate si tu!</p>
 
     <div class="buttons">
-        <a href="#" class="btn discord">Intra pe Discord</a>
-        <a href="#" class="btn play">Intra pe Joc!</a>
+        <a href="https://discord.gg/LINKUL-TAU" target="_blank" class="btn discord">Intra pe Discord</a>
+        <a href="https://www.roblox.com/games/LINKUL-TAU" target="_blank" class="btn play">Intra pe Joc!</a>
         <a href="#features" class="btn secondary">Vezi Features</a>
     </div>
 </div>
@@ -212,7 +228,7 @@ footer{
 <section id="contact">
     <h2>Contact</h2>
     <p>Alatura-te comunitatii noastre pe Discord pentru suport si evenimente exclusive!</p>
-    <a href="#" class="btn discord">Intra pe Discord</a>
+    <a href="https://discord.gg/https://discord.gg/ZRPSgAmt6s" target="_blank" class="btn discord">Intra pe Discord</a>
 </section>
 
 <footer>
@@ -221,13 +237,22 @@ footer{
 
 <div id="hint">🔊 Click oriunde pentru muzica</div>
 
+<div id="musicBox">
+    <img src="https://img.youtube.com/vi/ky7MofVVoBc/hqdefault.jpg">
+    <div>
+        <div style="font-size:14px;">Nume Muzica: Ruta661 Theme</div>
+        <input type="range" min="0" max="100" value="50" id="volumeSlider">
+    </div>
+</div>
 
 <iframe id="music"
 width="0"
 height="0"
-src="https://www.youtube.com/embed/ky7MofVVoBc?autoplay=0&loop=1&playlist=ky7MofVVoBc"
+src="https://www.youtube.com/embed/ky7MofVVoBc?autoplay=0&loop=1&playlist=ky7MofVVoBc&enablejsapi=1"
 allow="autoplay">
 </iframe>
+
+<script src="https://www.youtube.com/iframe_api"></script>
 
 <script>
 
@@ -239,14 +264,25 @@ for(let i=0;i<80;i++){
     document.body.appendChild(p);
 }
 
+let player;
+function onYouTubeIframeAPIReady(){
+    player = new YT.Player('music');
+}
 
 let started=false;
 document.body.addEventListener("click", function(){
     if(started) return;
-    document.getElementById("music").src="https://www.youtube.com/embed/ky7MofVVoBc?autoplay=1&loop=1&playlist=ky7MofVVoBc";
+    player.playVideo();
     document.getElementById("hint").style.display="none";
     started=true;
 });
+
+document.getElementById("volumeSlider").addEventListener("input", function(){
+    if(player){
+        player.setVolume(this.value);
+    }
+});
+
 </script>
 
 </body>
