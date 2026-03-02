@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ruta661 - Roleplay</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;scroll-behavior:smooth;}
+body{
+    background:linear-gradient(-45deg,#0f2027,#203a43,#2c5364,#1c1c1c);
+    background-size:400% 400%;
+    animation:bg 15s ease infinite;
+    color:white;
+}
+@keyframes bg{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+/* NAVBAR */
+nav{
+    position:fixed;
+    top:0;
+    width:100%;
+    background:rgba(0,0,0,0.6);
+    backdrop-filter:blur(10px);
+    padding:15px 50px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    z-index:1000;
+}
+nav h2{font-weight:700;}
+nav ul{list-style:none;display:flex;gap:25px;}
+nav ul li a{
+    text-decoration:none;
+    color:white;
+    font-weight:500;
+    transition:.3s;
+}
+nav ul li a:hover{color:#00f2ff;}
+
+
+.hero{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+}
+.logo{
+    width:170px;
+    animation:float 3s ease-in-out infinite;
+}
+@keyframes float{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-15px);}
+}
+.hero h1{
+    font-size:75px;
+    font-weight:900;
+    background:linear-gradient(90deg,#00f2ff,#00ff95);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+.hero p{margin-top:15px;font-size:22px;opacity:.85;}
+.buttons{margin-top:40px;}
+.btn{
+    display:inline-block;
+    padding:15px 35px;
+    margin:10px;
+    border-radius:40px;
+    text-decoration:none;
+    color:white;
+    font-weight:600;
+    transition:.3s;
+}
+.btn:hover{transform:scale(1.08);}
+.discord{background:linear-gradient(45deg,#5865F2,#7289DA);}
+.play{background:linear-gradient(45deg,#00ff95,#00c3ff);}
+.secondary{background:linear-gradient(45deg,#ff512f,#dd2476);}
+
+
+section{
+    padding:100px 10%;
+    text-align:center;
+}
+section h2{
+    font-size:40px;
+    margin-bottom:40px;
+}
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+}
+.card{
+    background:rgba(255,255,255,0.05);
+    padding:30px;
+    border-radius:20px;
+    backdrop-filter:blur(10px);
+    transition:.3s;
+}
+.card:hover{
+    transform:translateY(-10px);
+    background:rgba(255,255,255,0.1);
+}
+
+
+footer{
+    background:#111;
+    padding:30px;
+    text-align:center;
+    opacity:.8;
+}
+
+
+.particle{
+    position:absolute;
+    width:4px;
+    height:15px;
+    background:rgba(255,255,255,0.25);
+    top:-50px;
+    animation:fall linear infinite;
+}
+@keyframes fall{
+    to{transform:translateY(110vh);opacity:0;}
+}
+
+
+#hint{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    font-size:14px;
+    opacity:.7;
+}
+</style>
+</head>
+<body>
+
+<nav>
+    <h2>Ruta661</h2>
+    <ul>
+        <li><a href="#despre">Despre</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#staff">Staff</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<div class="hero">
+    <img src="https://image2url.com/r2/default/images/1772485887739-b92e97d8-fdf6-41b2-a3cc-ed8df1a35bd1.png" class="logo">
+    <h1>RUTA661</h1>
+    <p>O experienta de neuitat! Alaturate si tu!</p>
+
+    <div class="buttons">
+        <a href="#" class="btn discord">Intra pe Discord</a>
+        <a href="#" class="btn play">Intra pe Joc!</a>
+        <a href="#features" class="btn secondary">Vezi Features</a>
+    </div>
+</div>
+
+<section id="despre">
+    <h2>Despre Server</h2>
+    <p>Ruta661 este un server Roblox Roleplay realist cu joburi, economie, masini si interactiuni reale intre jucatori.</p>
+</section>
+
+<section id="features">
+    <h2>Features</h2>
+    <div class="cards">
+        <div class="card">
+            <h3>Joburi Realiste</h3>
+            <p>Politie, SMURD, Mecanici si multe altele.</p>
+        </div>
+        <div class="card">
+            <h3>Economie Activa</h3>
+            <p>Sistem bancar, salarii si tranzactii reale.</p>
+        </div>
+        <div class="card">
+            <h3>Masini Custom</h3>
+            <p>Vehicule unice si tuning special.</p>
+        </div>
+    </div>
+</section>
+
+<section id="staff">
+    <h2>Echipa Staff</h2>
+    <div class="cards">
+        <div class="card">
+            <h3>Fondator</h3>
+            <p>ZUP</p>
+        </div>
+        <div class="card">
+            <h3>Development</h3>
+            <p>Script & Build</p>
+        </div>
+        <div class="card">
+            <h3>Staff</h3>
+            <p>Suport Comunitate</p>
+        </div>
+    </div>
+</section>
+
+<section id="contact">
+    <h2>Contact</h2>
+    <p>Alatura-te comunitatii noastre pe Discord pentru suport si evenimente exclusive!</p>
+    <a href="#" class="btn discord">Intra pe Discord</a>
+</section>
+
+<footer>
+    © 2026 Ruta661 Roleplay - Toate drepturile rezervate
+</footer>
+
+<div id="hint">🔊 Click oriunde pentru muzica</div>
+
+
+<iframe id="music"
+width="0"
+height="0"
+src="https://www.youtube.com/embed/ky7MofVVoBc?autoplay=0&loop=1&playlist=ky7MofVVoBc"
+allow="autoplay">
+</iframe>
+
+<script>
+
+for(let i=0;i<80;i++){
+    let p=document.createElement("div");
+    p.className="particle";
+    p.style.left=Math.random()*100+"vw";
+    p.style.animationDuration=(2+Math.random()*3)+"s";
+    document.body.appendChild(p);
+}
+
+
+let started=false;
+document.body.addEventListener("click", function(){
+    if(started) return;
+    document.getElementById("music").src="https://www.youtube.com/embed/ky7MofVVoBc?autoplay=1&loop=1&playlist=ky7MofVVoBc";
+    document.getElementById("hint").style.display="none";
+    started=true;
+});
+</script>
+
+</body>
+</html>
