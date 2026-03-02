@@ -1,206 +1,291 @@
-<!-- ========================= -->
-<!-- ADAUGARI MASIVE (NU MODIFICA DESIGN EXISTENT) -->
-<!-- Pune acest cod FIX inainte de </body> -->
-<!-- ========================= -->
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ruta661 - Roleplay</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700;900&display=swap" rel="stylesheet">
 
 <style>
-
-/* ===== NOTIFICARI ===== */
-#notifyBox{
-    position:fixed;
-    top:90px;
-    right:20px;
-    display:flex;
-    flex-direction:column;
-    gap:15px;
-    z-index:2000;
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;scroll-behavior:smooth;}
+body{
+    background:linear-gradient(-45deg,#0f2027,#203a43,#2c5364,#1c1c1c);
+    background-size:400% 400%;
+    animation:bg 15s ease infinite;
+    color:white;
 }
-.notify{
-    background:rgba(0,0,0,0.75);
-    padding:15px 20px;
-    border-radius:15px;
+@keyframes bg{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+nav{
+    position:fixed;
+    top:0;
+    width:100%;
+    background:rgba(0,0,0,0.6);
     backdrop-filter:blur(10px);
-    animation:slideIn .5s ease forwards;
-    font-size:14px;
+    padding:15px 50px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    z-index:1000;
 }
-@keyframes slideIn{
-    from{transform:translateX(100px);opacity:0;}
-    to{transform:translateX(0);opacity:1;}
+nav h2{font-weight:700;}
+nav ul{list-style:none;display:flex;gap:25px;}
+nav ul li a{
+    text-decoration:none;
+    color:white;
+    font-weight:500;
+    transition:.3s;
 }
+nav ul li a:hover{color:#00f2ff;}
 
-/* ===== CURSOR GLOW ===== */
-#cursorGlow{
-    position:fixed;
-    width:25px;
-    height:25px;
-    border-radius:50%;
-    pointer-events:none;
-    background:radial-gradient(circle,rgba(0,255,255,0.6),transparent 70%);
-    mix-blend-mode:screen;
-    z-index:3000;
+.hero{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
 }
-
-/* ===== BACK TO TOP ===== */
-#topBtn{
-    position:fixed;
-    bottom:90px;
-    right:20px;
-    padding:12px 18px;
-    border-radius:30px;
-    background:linear-gradient(45deg,#00f2ff,#00ff95);
-    border:none;
+.logo{
+    width:170px;
+    animation:float 3s ease-in-out infinite;
+}
+@keyframes float{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-15px);}
+}
+.hero h1{
+    font-size:75px;
+    font-weight:900;
+    background:linear-gradient(90deg,#00f2ff,#00ff95);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+.hero p{margin-top:15px;font-size:22px;opacity:.85;}
+.buttons{margin-top:40px;}
+.btn{
+    display:inline-block;
+    padding:15px 35px;
+    margin:10px;
+    border-radius:40px;
+    text-decoration:none;
     color:white;
     font-weight:600;
+    transition:.3s;
     cursor:pointer;
-    display:none;
-    z-index:1500;
+}
+.btn:hover{transform:scale(1.08);}
+.discord{background:linear-gradient(45deg,#5865F2,#7289DA);}
+.play{background:linear-gradient(45deg,#00ff95,#00c3ff);}
+.secondary{background:linear-gradient(45deg,#ff512f,#dd2476);}
+
+section{
+    padding:100px 10%;
+    text-align:center;
+}
+section h2{
+    font-size:40px;
+    margin-bottom:40px;
+}
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+}
+.card{
+    background:rgba(255,255,255,0.05);
+    padding:30px;
+    border-radius:20px;
+    backdrop-filter:blur(10px);
+    transition:.3s;
+}
+.card:hover{
+    transform:translateY(-10px);
+    background:rgba(255,255,255,0.1);
 }
 
-/* ===== LIVE COUNTER ===== */
-#liveStats{
+footer{
+    background:#111;
+    padding:30px;
+    text-align:center;
+    opacity:.8;
+}
+
+.particle{
+    position:absolute;
+    width:4px;
+    height:15px;
+    background:rgba(255,255,255,0.25);
+    top:-50px;
+    animation:fall linear infinite;
+}
+@keyframes fall{
+    to{transform:translateY(110vh);opacity:0;}
+}
+
+#hint{
     position:fixed;
-    top:90px;
+    bottom:20px;
+    right:20px;
+    font-size:14px;
+    opacity:.7;
+}
+
+/* MUSIC PANEL */
+#musicBox{
+    position:fixed;
+    bottom:20px;
     left:20px;
     background:rgba(0,0,0,0.6);
     backdrop-filter:blur(10px);
     padding:15px;
     border-radius:15px;
-    font-size:14px;
-    z-index:1500;
+    display:flex;
+    align-items:center;
+    gap:15px;
 }
-
-/* ===== PROGRESS BAR ===== */
-#scrollBar{
-    position:fixed;
-    top:0;
-    left:0;
-    height:4px;
-    width:0%;
-    background:linear-gradient(90deg,#00f2ff,#00ff95);
-    z-index:5000;
+#musicBox img{
+    width:60px;
+    border-radius:10px;
 }
-
+#musicBox input{
+    width:100px;
+}
 </style>
+</head>
+<body>
 
-<div id="scrollBar"></div>
-<div id="notifyBox"></div>
-<div id="cursorGlow"></div>
-<button id="topBtn">Sus ↑</button>
+<nav>
+    <h2>Ruta661</h2>
+    <ul>
+        <li><a href="#despre">Despre</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#staff">Staff</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
 
-<div id="liveStats">
-    👥 Jucatori Online: <span id="players">0</span><br>
-    💰 Bani in economie: <span id="money">0</span>$
+<div class="hero">
+    <img src="https://image2url.com/r2/default/images/1772485887739-b92e97d8-fdf6-41b2-a3cc-ed8df1a35bd1.png" class="logo">
+    <h1>RUTA661</h1>
+    <p>O experienta de neuitat! Alaturate si tu!</p>
+
+    <div class="buttons">
+        <a href="https://discord.gg/ZRPSgAmt6s" target="_blank" class="btn discord">Intra pe Discord</a>
+        <a href="https://www.roblox.com/games/12505874661" target="_blank" class="btn play">Intra pe Joc!</a>
+        <a href="#features" class="btn secondary">Vezi Features</a>
+    </div>
 </div>
+
+<section id="despre">
+    <h2>Despre Server</h2>
+    <p>Ruta661 este un server Roblox Roleplay realist cu joburi, economie, masini si interactiuni reale intre jucatori.</p>
+</section>
+
+<section id="features">
+    <h2>Features</h2>
+    <div class="cards">
+        <div class="card">
+            <h3>Joburi Realiste</h3>
+            <p>Politie, SMURD, Mecanici si multe altele.</p>
+        </div>
+        <div class="card">
+            <h3>Economie Activa</h3>
+            <p>Sistem bancar, salarii si tranzactii reale.</p>
+        </div>
+        <div class="card">
+            <h3>Masini Custom</h3>
+            <p>Vehicule unice si tuning special.</p>
+        </div>
+    </div>
+</section>
+
+<section id="staff">
+    <h2>Echipa Staff</h2>
+    <div class="cards">
+        <div class="card">
+            <h3>Fondator</h3>
+            <p>ZUP</p>
+        </div>
+        <div class="card">
+            <h3>Development</h3>
+            <p>Script & Build</p>
+        </div>
+        <div class="card">
+            <h3>Staff</h3>
+            <p>Suport Comunitate</p>
+        </div>
+    </div>
+</section>
+
+<section id="contact">
+    <h2>Contact</h2>
+    <p>Alatura-te comunitatii noastre pe Discord pentru suport si evenimente exclusive!</p>
+    <a href="https://discord.gg/https://discord.gg/ZRPSgAmt6s" target="_blank" class="btn discord">Intra pe Discord</a>
+</section>
+
+<footer>
+    © 2026 Ruta661 Roleplay - Toate drepturile rezervate
+</footer>
+
+<div id="hint">🔊 Click oriunde pentru muzica</div>
+
+<div id="musicBox">
+    <img src="https://img.youtube.com/vi/ky7MofVVoBc/hqdefault.jpg">
+    <div>
+        <div style="font-size:14px;">Nume Muzica: Albert Nbn - Got Em</div>
+        <input type="range" min="0" max="100" value="50" id="volumeSlider">
+    </div>
+</div>
+
+<iframe id="music"
+width="0"
+height="0"
+src="https://www.youtube.com/embed/ky7MofVVoBc?autoplay=0&loop=1&playlist=ky7MofVVoBc&enablejsapi=1"
+allow="autoplay">
+</iframe>
+
+<script src="https://www.youtube.com/iframe_api"></script>
 
 <script>
 
-/* ===== PROGRESS SCROLL ===== */
-window.addEventListener("scroll",()=>{
-    let winScroll=document.body.scrollTop||document.documentElement.scrollTop;
-    let height=document.documentElement.scrollHeight-document.documentElement.clientHeight;
-    let scrolled=(winScroll/height)*100;
-    document.getElementById("scrollBar").style.width=scrolled+"%";
-
-    if(winScroll>400){
-        document.getElementById("topBtn").style.display="block";
-    }else{
-        document.getElementById("topBtn").style.display="none";
-    }
-});
-
-/* ===== BACK TO TOP ===== */
-document.getElementById("topBtn").onclick=()=>{
-    window.scrollTo({top:0,behavior:"smooth"});
-};
-
-/* ===== CURSOR EFFECT ===== */
-const glow=document.getElementById("cursorGlow");
-document.addEventListener("mousemove",(e)=>{
-    glow.style.left=e.clientX-12+"px";
-    glow.style.top=e.clientY-12+"px";
-});
-
-/* ===== RANDOM NOTIFICATIONS ===== */
-const notifyBox=document.getElementById("notifyBox");
-function createNotification(text){
-    let n=document.createElement("div");
-    n.className="notify";
-    n.innerText=text;
-    notifyBox.appendChild(n);
-    setTimeout(()=>{n.remove();},4000);
+for(let i=0;i<80;i++){
+    let p=document.createElement("div");
+    p.className="particle";
+    p.style.left=Math.random()*100+"vw";
+    p.style.animationDuration=(2+Math.random()*3)+"s";
+    document.body.appendChild(p);
 }
 
-setInterval(()=>{
-    const messages=[
-        "🔥 Un nou jucator s-a alaturat serverului!",
-        "🚓 Recrutari deschise la Politie!",
-        "💰 Salariile au fost platite!",
-        "🚗 Masini noi adaugate!",
-        "🎉 Eveniment live activ!"
-    ];
-    createNotification(messages[Math.floor(Math.random()*messages.length)]);
-},10000);
-
-/* ===== LIVE FAKE STATS ===== */
-let players=120;
-let money=250000;
-
-setInterval(()=>{
-    players+=Math.floor(Math.random()*5-2);
-    money+=Math.floor(Math.random()*1000);
-
-    if(players<80) players=80;
-
-    document.getElementById("players").innerText=players;
-    document.getElementById("money").innerText=money.toLocaleString();
-},2000);
-
-/* ===== TYPING HERO TEXT ===== */
-const heroText=document.querySelector(".hero p");
-const originalText=heroText.innerText;
-heroText.innerText="";
-let i=0;
-
-function typeWriter(){
-    if(i<originalText.length){
-        heroText.innerText+=originalText.charAt(i);
-        i++;
-        setTimeout(typeWriter,40);
-    }
+let player;
+function onYouTubeIframeAPIReady(){
+    player = new YT.Player('music');
 }
-typeWriter();
 
-/* ===== CARD ANIMATION ON SCROLL ===== */
-const observer=new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{
-        if(entry.isIntersecting){
-            entry.target.style.transform="translateY(0)";
-            entry.target.style.opacity="1";
-        }
-    });
-},{threshold:0.3});
-
-document.querySelectorAll(".card").forEach(card=>{
-    card.style.transform="translateY(40px)";
-    card.style.opacity="0";
-    card.style.transition="0.6s ease";
-    observer.observe(card);
+let started=false;
+document.body.addEventListener("click", function(){
+    if(started) return;
+    player.playVideo();
+    document.getElementById("hint").style.display="none";
+    started=true;
 });
 
-/* ===== SOUND CLICK EFFECT ===== */
-const clickSound=new Audio("https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3");
-document.querySelectorAll(".btn").forEach(btn=>{
-    btn.addEventListener("click",()=>{
-        clickSound.currentTime=0;
-        clickSound.play();
-    });
+document.getElementById("volumeSlider").addEventListener("input", function(){
+    if(player){
+        player.setVolume(this.value);
+    }
 });
-
-/* ===== DYNAMIC TITLE EFFECT ===== */
-let titleText="RUTA661 🔥 ";
-setInterval(()=>{
-    document.title=titleText;
-    titleText=titleText.slice(1)+titleText[0];
-},300);
 
 </script>
+
+</body>
+</html>
+
+
