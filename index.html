@@ -692,6 +692,193 @@
       .logo{ animation:none !important; }
       .reveal{ transition:none !important; }
     }
+
+    /* ===========================
+       ADDED: FEEDBACK (CSS)
+       =========================== */
+    .feedbackTop{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top: 10px;
+    }
+    .feedbackStats{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.22);
+      border: 1px solid rgba(255,255,255,.10);
+      color: rgba(255,255,255,.82);
+      font-weight: 800;
+      font-size: 12px;
+      user-select:none;
+    }
+
+    .feedbackList{
+      margin-top: 14px;
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+    .fbItem{
+      grid-column: span 6;
+      background: rgba(0,0,0,.18);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 18px;
+      padding: 16px 16px;
+      position:relative;
+      overflow:hidden;
+      box-shadow: 0 12px 28px rgba(0,0,0,.22);
+    }
+    .fbItem::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(circle at 20% 20%, rgba(0,242,255,.12), transparent 50%);
+      opacity:.85;
+      pointer-events:none;
+    }
+    .fbMeta{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      position:relative;
+      z-index:1;
+      margin-bottom: 8px;
+    }
+    .fbName{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight: 900;
+      letter-spacing:.2px;
+      font-size: 14px;
+    }
+    .fbBadge{
+      font-size: 11px;
+      font-weight: 900;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      color: rgba(255,255,255,.82);
+      white-space:nowrap;
+    }
+    .fbText{
+      position:relative;
+      z-index:1;
+      color: rgba(255,255,255,.80);
+      font-weight: 650;
+      line-height: 1.65;
+      font-size: 13px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .fbEmpty{
+      grid-column: 1 / -1;
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px dashed rgba(255,255,255,.14);
+      background: rgba(0,0,0,.16);
+      color: rgba(255,255,255,.74);
+      font-weight: 700;
+      text-align:center;
+    }
+
+    /* Modal */
+    .fbModal{
+      position:fixed;
+      inset:0;
+      z-index:1800;
+      display:none;
+    }
+    .fbModal.show{ display:block; }
+
+    .fbBackdrop{
+      position:absolute;
+      inset:0;
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(6px);
+    }
+    .fbDialog{
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform: translate(-50%, -50%);
+      width: min(560px, calc(100% - 28px));
+      background: rgba(0,0,0,.78);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 22px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.45);
+      backdrop-filter: blur(14px);
+      overflow:hidden;
+    }
+    .fbHead{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 12px;
+      padding: 16px 16px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+    }
+    .fbTitle{
+      font-weight: 900;
+      font-size: 16px;
+      letter-spacing:.2px;
+    }
+    .fbSub{
+      margin-top: 4px;
+      color: rgba(255,255,255,.72);
+      font-weight: 650;
+      font-size: 12px;
+    }
+    .fbForm{
+      padding: 16px 16px 18px;
+      display:grid;
+      gap: 10px;
+    }
+    .fbLabel{
+      color: rgba(255,255,255,.84);
+      font-weight: 800;
+      font-size: 12px;
+      margin-top: 6px;
+    }
+    .fbInput, .fbTextarea{
+      width:100%;
+      padding: 12px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: #fff;
+      outline:none;
+      font-weight: 700;
+    }
+    .fbTextarea{ resize: none; }
+    .fbInput:focus, .fbTextarea:focus{
+      border-color: rgba(0,242,255,.35);
+      box-shadow: 0 0 0 4px rgba(0,242,255,.08);
+    }
+    .fbActions{
+      display:flex;
+      justify-content:flex-end;
+      gap: 10px;
+      margin-top: 6px;
+      flex-wrap:wrap;
+    }
+    .fbHint{
+      min-height: 18px;
+      color: rgba(255,255,255,.78);
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    @media (max-width: 760px){
+      .fbItem{ grid-column: span 12; }
+    }
   </style>
 </head>
 
@@ -712,6 +899,7 @@
         <li><a href="#features">Features</a></li>
         <li><a href="#staff">Staff</a></li>
         <li><a href="#contact">Contact</a></li>
+        <!-- (Nu am atins meniul, dar dacă vrei link și aici, adaugă: <li><a href="#feedback">Feedback</a></li> ) -->
       </ul>
 
       <button class="burger" id="burger" aria-label="Meniu">
@@ -741,6 +929,7 @@
       <li><a href="#features">Features</a></li>
       <li><a href="#staff">Staff</a></li>
       <li><a href="#contact">Contact</a></li>
+      <!-- (Nu am atins meniul, dar dacă vrei link și aici, adaugă: <li><a href="#feedback">Feedback</a></li> ) -->
     </ul>
   </aside>
 
@@ -947,7 +1136,83 @@
         </div>
       </div>
     </section>
+
+    <!-- ===========================
+         ADDED: FEEDBACK (SECTION)
+         =========================== -->
+    <section id="feedback">
+      <div class="sectionCard reveal">
+        <div class="sectionInner">
+          <div class="sectionHeader">
+            <h2>Feedback</h2>
+            <p>Apasă „Postează Feedback” și lasă-ne un mesaj. Se salvează și rămâne aici.</p>
+          </div>
+
+          <div class="feedbackTop">
+            <button class="btn secondary" id="openFeedback" type="button" aria-label="Posteaza Feedback">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 5v14"></path>
+                <path d="M5 12h14"></path>
+              </svg>
+              Postează Feedback
+            </button>
+
+            <div class="feedbackStats" id="feedbackStats" aria-label="Statistici feedback">
+              <span class="dot" aria-hidden="true"></span>
+              <span id="feedbackCount">0 feedback-uri</span>
+            </div>
+          </div>
+
+          <div class="feedbackList" id="feedbackList" aria-label="Lista feedback"></div>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <!-- ===========================
+       ADDED: FEEDBACK (MODAL)
+       =========================== -->
+  <div class="fbModal" id="fbModal" aria-hidden="true">
+    <div class="fbBackdrop" id="fbBackdrop"></div>
+
+    <div class="fbDialog" role="dialog" aria-modal="true" aria-label="Trimite feedback">
+      <div class="fbHead">
+        <div>
+          <div class="fbTitle">Trimite Feedback</div>
+          <div class="fbSub">Completează numele și mesajul.</div>
+        </div>
+
+        <button class="iconBtn" id="fbClose" type="button" aria-label="Inchide">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18"></path>
+          </svg>
+        </button>
+      </div>
+
+      <form class="fbForm" id="fbForm" autocomplete="off">
+        <label class="fbLabel" for="fbName">Nume</label>
+        <input class="fbInput" id="fbName" name="fbName" maxlength="24" placeholder="Ex: Andrei" required />
+
+        <label class="fbLabel" for="fbMsg">Mesaj</label>
+        <textarea class="fbTextarea" id="fbMsg" name="fbMsg" rows="5" maxlength="400" placeholder="Scrie feedback-ul tău..." required></textarea>
+
+        <div class="fbActions">
+          <button class="btn" type="button" id="fbCancel" style="background: rgba(255,255,255,.06);">
+            Anulează
+          </button>
+          <button class="btn play" type="submit" aria-label="Trimite feedback">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M22 2L11 13"></path>
+              <path d="M22 2l-7 20-4-9-9-4 20-7z"></path>
+            </svg>
+            Postează
+          </button>
+        </div>
+
+        <div class="fbHint" id="fbHintMsg" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
 
   <footer>
     <div class="foot">© 2026 Ruta661 Roleplay - Toate drepturile rezervate</div>
@@ -1093,7 +1358,10 @@
     const dlinks = Array.from(document.querySelectorAll('#drawerLinks a'));
     const allLinks = links.concat(dlinks);
 
-    const sections = ["despre","features","staff","contact"]
+    // ===========================
+    // MODIF: am adăugat feedback în lista de secțiuni (minimal)
+    // ===========================
+    const sections = ["despre","features","staff","contact","feedback"]
       .map(id => document.getElementById(id))
       .filter(Boolean);
 
@@ -1246,7 +1514,163 @@
 
     setPlayIcon(false);
     setMuteIcon(false);
+
+    /* ===========================
+       ADDED: FEEDBACK (JS)
+       - salvează în localStorage
+       - se actualizează instant
+       =========================== */
+    const FB_KEY = "r661_feedback_v1";
+
+    const openFeedback = document.getElementById("openFeedback");
+    const fbModal = document.getElementById("fbModal");
+    const fbBackdrop = document.getElementById("fbBackdrop");
+    const fbClose = document.getElementById("fbClose");
+    const fbCancel = document.getElementById("fbCancel");
+    const fbForm = document.getElementById("fbForm");
+    const fbName = document.getElementById("fbName");
+    const fbMsg = document.getElementById("fbMsg");
+    const fbList = document.getElementById("feedbackList");
+    const fbCount = document.getElementById("feedbackCount");
+    const fbHintMsg = document.getElementById("fbHintMsg");
+
+    function nowLabel(ts){
+      try{
+        return new Date(ts).toLocaleString("ro-RO", { dateStyle:"medium", timeStyle:"short" });
+      }catch(_){
+        return "";
+      }
+    }
+
+    function loadFeedback(){
+      try{
+        const raw = localStorage.getItem(FB_KEY);
+        const arr = raw ? JSON.parse(raw) : [];
+        return Array.isArray(arr) ? arr : [];
+      }catch(_){
+        return [];
+      }
+    }
+
+    function saveFeedback(arr){
+      try{
+        localStorage.setItem(FB_KEY, JSON.stringify(arr));
+      }catch(_){}
+    }
+
+    function setCount(n){
+      fbCount.textContent = n === 1 ? "1 feedback" : `${n} feedback-uri`;
+    }
+
+    function renderFeedback(){
+      if(!fbList) return;
+
+      const data = loadFeedback().sort((a,b) => (b.ts||0) - (a.ts||0));
+      setCount(data.length);
+
+      fbList.innerHTML = "";
+
+      if(data.length === 0){
+        const empty = document.createElement("div");
+        empty.className = "fbEmpty";
+        empty.textContent = "Încă nu există feedback. Fii primul!";
+        fbList.appendChild(empty);
+        return;
+      }
+
+      for(const item of data){
+        const wrap = document.createElement("div");
+        wrap.className = "fbItem reveal in";
+
+        const meta = document.createElement("div");
+        meta.className = "fbMeta";
+
+        const name = document.createElement("div");
+        name.className = "fbName";
+        name.textContent = (item.name || "Anonim").trim() || "Anonim";
+
+        const badge = document.createElement("div");
+        badge.className = "fbBadge";
+        badge.textContent = nowLabel(item.ts || Date.now());
+
+        meta.appendChild(name);
+        meta.appendChild(badge);
+
+        const text = document.createElement("div");
+        text.className = "fbText";
+        text.textContent = (item.msg || "").trim();
+
+        wrap.appendChild(meta);
+        wrap.appendChild(text);
+        fbList.appendChild(wrap);
+      }
+    }
+
+    function showModal(){
+      if(!fbModal) return;
+      fbModal.classList.add("show");
+      fbModal.setAttribute("aria-hidden","false");
+      document.body.style.overflow = "hidden";
+      fbHintMsg.textContent = "";
+      setTimeout(() => fbName && fbName.focus(), 50);
+    }
+
+    function hideModal(){
+      if(!fbModal) return;
+      fbModal.classList.remove("show");
+      fbModal.setAttribute("aria-hidden","true");
+      document.body.style.overflow = "";
+    }
+
+    if(openFeedback) openFeedback.addEventListener("click", (e) => {
+      e.stopPropagation();
+      showModal();
+    });
+    if(fbBackdrop) fbBackdrop.addEventListener("click", hideModal);
+    if(fbClose) fbClose.addEventListener("click", hideModal);
+    if(fbCancel) fbCancel.addEventListener("click", hideModal);
+
+    window.addEventListener("keydown", (e) => {
+      if(e.key === "Escape" && fbModal && fbModal.classList.contains("show")) hideModal();
+    });
+
+    if(fbForm) fbForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const name = (fbName.value || "").trim();
+      const msg = (fbMsg.value || "").trim();
+
+      if(msg.length < 3){
+        fbHintMsg.textContent = "Mesajul e prea scurt.";
+        return;
+      }
+
+      const data = loadFeedback();
+      data.push({
+        id: String(Date.now()) + "_" + Math.random().toString(16).slice(2),
+        name: name.slice(0, 24),
+        msg: msg.slice(0, 400),
+        ts: Date.now()
+      });
+
+      saveFeedback(data);
+      renderFeedback();
+
+      fbName.value = "";
+      fbMsg.value = "";
+      fbHintMsg.textContent = "Feedback postat ✔";
+
+      // Închide frumos după un pic
+      setTimeout(() => hideModal(), 450);
+    });
+
+    // Live update dacă ai pagina deschisă în mai multe tab-uri
+    window.addEventListener("storage", (e) => {
+      if(e.key === FB_KEY) renderFeedback();
+    });
+
+    // init
+    renderFeedback();
   </script>
 </body>
 </html>
-
